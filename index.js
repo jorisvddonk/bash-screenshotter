@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const Jimp = require("jimp");
+const deepfry = require('./deepfry.js');
 
 (async () => {
   const browser = await puppeteer.launch();
@@ -29,24 +30,9 @@ const Jimp = require("jimp");
      Luckily, with `await` that's easy :D */
   const elements = await page.$$(".newquote");
   for (var i = 0; i < elements.length; i++) {
-    var imgpath = `quote_${i}.jpg`;
-    await elements[i].screenshot().then(function(buffer){
-      return new Promise(function(resolve, reject) {
-        Jimp.read(buffer, function(err, img) {
-          if (err) {
-            reject(err);
-          } else {
-            new Jimp(img.bitmap.width + 20, img.bitmap.height + 20, 0xFFFFFFFF, function (err, image) {
-              if (err) {
-                reject(err)
-              } else {
-                image.blit(img, 10, 10).quality(30).color([{apply: 'saturate', params: [100]}]).contrast(1).write(imgpath);
-                resolve();
-              }
-            });
-          }
-        });
-      });
+    var imgpath = `quote_${i}.png`;
+    await elements[i].screenshot({path: imgpath}).then(function(buffer){
+      return deepfry(buffer, imgpath.replace('png', 'jpg'));
     });
   }
   await browser.close();

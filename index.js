@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer");
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto("http://bash.org/?top");
+  await page.goto("http://bash.org/?random");
 
   /* Since puppeteer can only screenshot a single element and its children, and since Bash.org splits up entire quotes in two,
      we have to modify DOM such that every quote has a parent element we can then screenshot later on. */

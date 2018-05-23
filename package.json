@@ -1,0 +1,15 @@
+{
+  "name": "bash-screenshotter",
+  "version": "1.0.0",
+  "description": "Makes screenshots of quotes on bash.org",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^1.4.0"
+  }
+}

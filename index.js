@@ -2,10 +2,10 @@ const puppeteer = require("puppeteer");
 const Jimp = require("jimp");
 const deepfry = require("./deepfry.js");
 
-module.exports = function(max) {
+module.exports = function(max, puppeteerOptions) {
   return new Promise(function(resolve, reject) {
     (async () => {
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch(puppeteerOptions);
       const page = await browser.newPage();
       await page.goto("http://bash.org/?random");
 

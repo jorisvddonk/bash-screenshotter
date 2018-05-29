@@ -5,4 +5,4 @@ Makes screenshots of the top quotes on bash.org, via [Puppeteer](https://github.
 ## Usage
 
 1. `npm install`
-2. `node index.js`
+2. `node fetch_screenshots.js`

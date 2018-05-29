@@ -18,7 +18,7 @@ const colorednoise = function (x, y, idx) {
   }
 }
 
-module.exports = function(buffer, imgpath) {
+module.exports = function(buffer) {
   if (typeof buffer == 'string') {
     buffer = fs.readFileSync(buffer);
   }
@@ -43,8 +43,16 @@ module.exports = function(buffer, imgpath) {
               image.normalize();
               image.quality(20);
               image.scale(2, Jimp.RESIZE_HERMITE);
-              image.write(imgpath.replace("png", "jpg"));
-              resolve();
+              image.getBuffer(Jimp.MIME_JPEG, function(
+                err,
+                result
+              ) {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve(result);
+                }
+              });
             }
           }
         );
